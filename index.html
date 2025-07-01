@@ -1,0 +1,175 @@
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pretty Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .card:hover {
+            transform: scale(1.02);
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="/">PrettyShop</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto gap-3">
+                <li class="nav-item"><a class="nav-link" href="/" th:href="@{/}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/products" th:href="@{/products}">Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="/cart" th:href="@{/cart}">Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact" th:href="@{/contact}">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+ Hero Section 
+<header class="bg-primary text-white text-center py-5">
+    <div class="container">
+        <h1 class="display-4">Welcome to PrettyShop</h1>
+        <p class="lead">The best place to shop online!</p>
+        <a href="/products" class="btn btn-light btn-lg mt-3">Shop Now</a>
+    </div>
+</header>
+
+<footer class="bg-light text-center py-4 mt-5 border-top">
+    <p class="mb-0">© 2025 PrettyShop. All Rights Reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+-->
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrettyShop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .hero {
+            background: linear-gradient(135deg, #007bff, #6610f2);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="/">PrettyShop</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto gap-3">
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/products}">Products</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/cart}">Cart</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/contact}">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero text-center py-5">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Welcome to PrettyShop</h1>
+        <p class="lead">Your one-stop online shopping destination!</p>
+        <a th:href="@{/products}" class="btn btn-light btn-lg mt-3">Shop Now</a>
+    </div>
+</header>
+
+<!-- Products Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Featured Products</h2>
+        <div class="row g-4">
+            <div class="col-md-4" th:each="product : ${products}">
+                <div class="card h-100">
+                    <img th:src="${product.imageUrl}" class="card-img-top" alt="Product Image">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title" th:text="${product.name}">Product Name</h5>
+                        <p class="card-text" th:text="${product.description}">Short product description goes here.</p>
+                        <div class="mt-auto">
+                            <p class="fw-bold text-primary mb-2">₹<span th:text="${product.price}">999</span></p>
+                            <a th:href="@{'/cart/add/' + ${product.id}}" class="btn btn-primary w-100">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Static example cards (if no dynamic data available) -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Product">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Sample Product 1</h5>
+                        <p class="card-text">High-quality product at the best price.</p>
+                        <div class="mt-auto">
+                            <p class="fw-bold text-primary mb-2">₹999</p>
+                            <a href="#" class="btn btn-primary w-100">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Product">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Sample Product 2</h5>
+                        <p class="card-text">Exclusive design and superior quality.</p>
+                        <div class="mt-auto">
+                            <p class="fw-bold text-primary mb-2">₹1499</p>
+                            <a href="#" class="btn btn-primary w-100">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="bg-light text-center py-4 mt-5 border-top">
+    <p class="mb-0">© 2025 PrettyShop. All Rights Reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

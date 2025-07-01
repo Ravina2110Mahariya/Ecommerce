@@ -1,0 +1,111 @@
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cart</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+	body {
+	    background-color: #f8f9fa;
+	}
+
+	h1 {
+	    font-weight: 700;
+	    color: #343a40;
+	}
+
+	.table {
+	    border-radius: 0.5rem;
+	    overflow: hidden;
+	}
+
+	.table th, .table td {
+	    vertical-align: middle;
+	    text-align: center;
+	}
+
+	.table-hover tbody tr:hover {
+	    background-color: #f1f1f1;
+	}
+
+	.text-end {
+	    font-weight: 600;
+	    color: #007bff;
+	}
+
+	.text-muted {
+	    font-size: 1.1rem;
+	}
+	</style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Your Cart</h1>
+        
+        <div th:if="${cartItems != null and !#lists.isEmpty(cartItems)}">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${cartItems}">
+                        <td th:text="${item.name}">Name</td>
+                        <td th:text="'₹' + ${item.price}">₹0</td>
+                        <td th:text="${item.quantity}">1</td>
+                        <td th:text="'₹' + (${item.price} * ${item.quantity})">₹0</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3 class="text-end mt-3">Total: ₹<span th:text="${total}">0</span></h3>
+        </div>
+        
+        <div th:if="${cartItems == null or #lists.isEmpty(cartItems)}">
+            <p class="text-center text-muted">Your cart is empty.</p>
+        </div>
+    </div>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Your Cart</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price (₹)</th>
+                <th>Quantity</th>
+                <th>Subtotal (₹)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${cartItems}">
+                <td th:text="${item.product.name}">Product Name</td>
+                <td th:text="${item.product.price}">0</td>
+                <td th:text="${item.quantity}">0</td>
+                <td th:text="${item.subtotal}">0</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>Total: ₹<span th:text="${total}">0</span></h3>
+	
+	<div class="mt-3">
+	        <a href="/checkout" class="btn btn-success">Proceed to Checkout</a>
+	        <a href="/" class="btn btn-primary">Continue Shopping</a>
+	    </div>
+</div>
+</div>
+</body>
+</html>
